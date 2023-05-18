@@ -1,0 +1,5 @@
+# Date/Time =  Jun  3 9:18:03 2006
+==== Crate 1 type vme
+# slot	model	clear	header	mask	nchan	ndata
+  9	792	1	0xfa000000	0xffff0000	16	16
+  14	775	1	0xfa000000	0xffff0000	16	16
