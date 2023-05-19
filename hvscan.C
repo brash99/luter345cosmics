@@ -20,7 +20,7 @@ const Int_t runlist[numscan] = {91,  109, 106, 108, 104, 110 ,103, 111, 100, 117
 const Int_t *hv[numscan]={      1850,1800,1750,1700,1650,1625,1600,1575,1550,1525,1500,1475,1450,1425};
 TCanvas *adc_canvas1[numscan];
 Double_t *adc_means[numscan][Nadc];
-FILE *f = fopen("/home/brash/luter345cosmics/scan_means.dat","w");	
+FILE *f = fopen("./scan_means.dat","w");	
 
 for(int irun=0;irun<numscan;irun++){
 int nrun = runlist[irun];
@@ -57,7 +57,7 @@ int nrun = runlist[irun];
 	
 //=====================================GET PED for ADC==========================
 	if(remakepedfile){gROOT->ProcessLine(Form(".x luterpedestals.C(%d)",pedrun));cout<<"pedestal file made"<<endl;}
-	FILE *adcpeds = fopen(Form("/home/brash/luter345cosmics/pedestalfiles/pedestalrun%d.dat",pedrun),"r");
+	FILE *adcpeds = fopen(Form("./pedestalfiles/pedestalrun%d.dat",pedrun),"r");
 	for( int i = 0; i < Nadc ; i++) {//Start ADC filling loop
 		fscanf(adcpeds,"%lf\n",&ped[i]);
 //		printf("%lf\n",ped[i]);

@@ -35,7 +35,7 @@ void decodeLuter18(int run)
   int size; // number of channels to be read
   if (coda != NULL) {                               
     cout << "Opening ROOT output file ... " << endl;   
-    TFile * out = new TFile (Form("/home/brash/luter345cosmics/rootfiles/test%d.root",run),"RECREATE"); // creation of the output file                                         
+    TFile * out = new TFile (Form("./rootfiles/test%d.root",run),"RECREATE"); // creation of the output file                                         
     cout << "Opened! " << endl;   
     TTree * tdata = new TTree("tdata", Form("Run %d",run)); // creation of the tree
     cout << "Creating ADC and TDC branches in output file ... " << endl;   
