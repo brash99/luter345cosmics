@@ -30,7 +30,7 @@ void decodeLuter2(int run)
   int evcount=0;// number of events processed
   int size; // number of channels to be read
   if (coda != NULL) {                               
-    TFile * out = new TFile (Form("/home/jlabdaq/analyzer/rootfiles/test%d.root",run),"RECREATE"); // creation of the output file                                         
+    TFile * out = new TFile (Form("/home/brash/luter345cosmics/rootfiles/test%d.root",run),"RECREATE"); // creation of the output file                                         
     TTree * tdata = new TTree("tdata", Form("Run %d",run)); // creation of the tree
     tdata->Branch("tdc",&tdc,"tdc[16]/I"); // creation of the branch to hold the tdc data
     THaCodaDecoder * ev = new THaCodaDecoder;
