@@ -293,12 +293,45 @@ float getXTop(bool trigger, double ttl, double ttr, double tbl, double tbr) {
 	return -1000;
 }
 
+float getXMeanTop(bool trigger, double ttl, double ttr, double tbl, double tbr) {
+
+	//std::vector<float> v;
+
+	if(trigger) {
+		return (ttl+ttr-4000.0)*t_convert*vn;
+        }
+
+	return -1000;
+}
+
+float getXMean(bool trigger, double xmeantop, double xmeanbottom) {
+
+	//std::vector<float> v;
+
+	if(trigger) {
+		return (xmeantop-xmeanbottom)/2.0;
+        }
+
+	return -1000;
+}
+
 float getXBottom(bool trigger, double ttl, double ttr, double tbl, double tbr) {
 
 	//std::vector<float> v;
 
 	if(trigger) {
 		return (tbl-tbr)/2.0*t_convert*vn;
+        }
+
+	return -1000;
+}
+
+float getXMeanBottom(bool trigger, double ttl, double ttr, double tbl, double tbr) {
+
+	//std::vector<float> v;
+
+	if(trigger) {
+		return (tbl+tbr-4000.0)*t_convert*vn;
         }
 
 	return -1000;
@@ -420,10 +453,13 @@ TCanvas* plotTDCAdjusted(){
 TCanvas* plotAngles(){
 
 	TCanvas *c7 = new TCanvas("c7", "c7", 175,175,600,600);
-	c7->Divide(2,2, 0.01, 0.01, 0);
+	c7->Divide(2,3, 0.01, 0.01, 0);
 
 	auto hXTop = v[1].Histo1D({"h1","Top Position",bin,-0.3,0.3},"xtop");
 	auto hXBottom = v[1].Histo1D({"h2","Bottom Position",bin,-0.3,0.3},"xbottom");
+	auto hXMeanTop = v[1].Histo1D({"h1","Mean Top Position",bin,-0.3,0.3},"xmeantop");
+	auto hXMeanBottom = v[1].Histo1D({"h2","Mean Bottom Position",bin,-0.3,0.3},"xmeanbottom");
+	auto hXMean = v[1].Histo1D({"h2","Mean Position",bin,-0.3,0.3},"xmean");
 	auto hTheta = v[1].Histo1D({"h3","Angle 1",bin,-100,100},"theta");
 	auto hTheta2 = v[1].Histo1D({"h4","Angle 2",bin,-100,100},"theta2");
 
@@ -431,10 +467,16 @@ TCanvas* plotAngles(){
  	hXTop->Draw();
  	c7->cd(2);
  	hXBottom->Draw();
-  	c7->cd(3);
+	c7->cd(3);
+ 	hXMeanTop->Draw();
+ 	c7->cd(4);
+ 	hXMeanBottom->Draw();
+  	c7->cd(5);
+ 	hXMean->Draw();
+  	c7->cd(6);
   	hTheta->Draw();
-  	c7->cd(4);
-  	hTheta2->Draw();
+	hTheta2->SetFillColor(kRed);
+  	hTheta2->Draw("SAME");
 
 	c7->DrawClone();
 
@@ -578,6 +620,9 @@ void rdfluterplots(int run_number = 42) {
 			 .Define("adcbr","getAdcBR(trigger,&adc[0])")
 			 .Define("xtop","getXTop(trigger,tdctl,tdctr,tdcbl,tdcbr)")
 			 .Define("xbottom","getXBottom(trigger,tdctl,tdctr,tdcbl,tdcbr)")
+			 .Define("xmeantop","getXMeanTop(trigger,tdctl,tdctr,tdcbl,tdcbr)")
+			 .Define("xmeanbottom","getXMeanBottom(trigger,tdctl,tdctr,tdcbl,tdcbr)")
+			 .Define("xmean","getXMean(trigger,xmeantop,xmeanbottom)")
 			 .Define("theta","getTheta(trigger,xtop,xbottom)")
 			 .Define("theta2","getTheta2(trigger,xtop,xbottom)")
 			 .Define("etop","getETop(trigger,adctl,adctr)")
