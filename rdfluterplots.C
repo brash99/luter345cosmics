@@ -590,7 +590,8 @@ void rdfluterplots(int run_number = 42) {
         //TFile* f = new TFile((TString)fileName,"READ");
         //TTree* t = (TTree*)f->Get(treeName);
 
-	ROOT::EnableImplicitMT();
+	int nthreads = 4;
+	ROOT::EnableImplicitMT(nthreads);
         ROOT::RDataFrame d(treeName,fileName);
 	cout << "Opened RDataFrame" << endl;
 
