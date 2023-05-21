@@ -4,4 +4,6 @@
 *.swp
 *.swo
 *_C.so
+.ipynb_checkpoints/*
 rootfiles/*.root
+__pycache__/
