@@ -461,7 +461,7 @@ TCanvas* plotAngles(){
 	auto hXMeanBottom = v[1].Histo1D({"h2","Mean Bottom Position",bin,-0.3,0.3},"xmeanbottom");
 	auto hXMean = v[1].Histo1D({"h2","Mean Position",bin,-0.3,0.3},"xmean");
 	auto hTheta = v[1].Histo1D({"h3","Angle 1",bin,-100,100},"theta");
-	auto hTheta2 = v[1].Histo1D({"h4","Angle 2",bin,-100,100},"theta2");
+	//auto hTheta2 = v[1].Histo1D({"h4","Angle 2",bin,-100,100},"theta2");
 
 	c7->cd(1);
  	hXTop->Draw();
@@ -475,8 +475,8 @@ TCanvas* plotAngles(){
  	hXMean->Draw();
   	c7->cd(6);
   	hTheta->Draw();
-	hTheta2->SetFillColor(kRed);
-  	hTheta2->Draw("SAME");
+	//hTheta2->SetFillColor(kRed);
+  	//hTheta2->Draw("SAME");
 
 	c7->DrawClone();
 
@@ -625,7 +625,7 @@ void rdfluterplots(int run_number = 42) {
 			 .Define("xmeanbottom","getXMeanBottom(trigger,tdctl,tdctr,tdcbl,tdcbr)")
 			 .Define("xmean","getXMean(trigger,xmeantop,xmeanbottom)")
 			 .Define("theta","getTheta(trigger,xtop,xbottom)")
-			 .Define("theta2","getTheta2(trigger,xtop,xbottom)")
+			 //.Define("theta2","getTheta2(trigger,xtop,xbottom)")
 			 .Define("etop","getETop(trigger,adctl,adctr)")
 			 .Define("ebottom","getEBottom(trigger,adcbl,adcbr)")
 			 .Define("eratio","getERatio(trigger,etop,ebottom)")
