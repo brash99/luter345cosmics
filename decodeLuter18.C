@@ -13,7 +13,7 @@
 
 
 //adjust according to the analysis computer used
-#define DATAFILENAME "/home/coda/CODA/data/test_%d.dat"
+#define DATAFILENAME "/home/coda/coda/data/test_%d.evio.0"
 
 #include<iostream>
 
