@@ -298,7 +298,7 @@ float getXMeanTop(bool trigger, double ttl, double ttr, double tbl, double tbr) 
 	//std::vector<float> v;
 
 	if(trigger) {
-		return (ttl+ttr-4000.0)*t_convert*vn;
+		return (ttl+ttr-4000.0)/2.0*t_convert*vn;
         }
 
 	return -1000;
@@ -309,7 +309,7 @@ float getXMean(bool trigger, double xmeantop, double xmeanbottom) {
 	//std::vector<float> v;
 
 	if(trigger) {
-		return (xmeantop-xmeanbottom)/2.0;
+		return (xmeantop-xmeanbottom);
         }
 
 	return -1000;
@@ -331,7 +331,7 @@ float getXMeanBottom(bool trigger, double ttl, double ttr, double tbl, double tb
 	//std::vector<float> v;
 
 	if(trigger) {
-		return (tbl+tbr-4000.0)*t_convert*vn;
+		return (tbl+tbr-4000.0)/2.0*t_convert*vn;
         }
 
 	return -1000;
@@ -453,7 +453,7 @@ TCanvas* plotTDCAdjusted(){
 TCanvas* plotAngles(){
 
 	TCanvas *c7 = new TCanvas("c7", "c7", 175,175,600,600);
-	c7->Divide(2,3, 0.01, 0.01, 0);
+	c7->Divide(4,3, 0.01, 0.01, 0);
 
 	auto hXTop = v[1].Histo1D({"h1","Top Position",bin,-0.3,0.3},"xtop");
 	auto hXBottom = v[1].Histo1D({"h2","Bottom Position",bin,-0.3,0.3},"xbottom");
@@ -462,6 +462,12 @@ TCanvas* plotAngles(){
 	auto hXMean = v[1].Histo1D({"h2","Mean Position",bin,-0.3,0.3},"xmean");
 	auto hTheta = v[1].Histo1D({"h3","Angle 1",bin,-100,100},"theta");
 	//auto hTheta2 = v[1].Histo1D({"h4","Angle 2",bin,-100,100},"theta2");
+	auto hXtopXbottom = v[1].Histo2D({"h7","Xtop vs Xbottom",bin,-0.3,0.3,bin,-0.3,0.3},"xtop","xbottom");
+	auto hXMeantopXMeanbottom = v[1].Histo2D({"h7","XMeantop vs XMeanbottom",bin,-0.3,0.3,bin,-0.3,0.3},"xmeantop","xmeanbottom");
+	auto hXMeanXbottom = v[1].Histo2D({"h7","XMean vs Xbottom",bin,-0.3,0.3,bin,-0.3,0.3},"xmean","xbottom");
+	auto hXMeanXtop = v[1].Histo2D({"h7","XMean vs Xtop",bin,-0.3,0.3,bin,-0.3,0.3},"xmean","xtop");
+	auto hXMeanAngle = v[1].Histo2D({"h7","XMean vs Angle",bin,-100,100,bin,-0.3,0.3},"theta","xmean");
+
 
 	c7->cd(1);
  	hXTop->Draw();
@@ -477,6 +483,17 @@ TCanvas* plotAngles(){
   	hTheta->Draw();
 	//hTheta2->SetFillColor(kRed);
   	//hTheta2->Draw("SAME");
+	c7->cd(7);
+	hXtopXbottom->Draw("COLZ");
+	c7->cd(8);
+	hXMeantopXMeanbottom->Draw("COLZ");
+	c7->cd(9);
+	hXMeanXtop->Draw("COLZ");
+	c7->cd(10);
+	hXMeanXbottom->Draw("COLZ");
+	c7->cd(11);
+	hXMeanAngle->Draw("COLZ");
+
 
 	c7->DrawClone();
 
