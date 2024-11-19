@@ -380,20 +380,28 @@ TCanvas* plotTDCvsXpos(){
 
 	c6->cd(1);
  	hTDCTLvsXT->Draw("COLZ");
+	gPad->SetLogz();
  	c6->cd(2);
  	hTDCTRvsXT->Draw("COLZ");
+	gPad->SetLogz();
   	c6->cd(3);
   	hTDCTLvsXB->Draw("COLZ");
+	gPad->SetLogz();
   	c6->cd(4);
   	hTDCTRvsXB->Draw("COLZ");
+	gPad->SetLogz();
 	c6->cd(5);
  	hTDCBLvsXT->Draw("COLZ");
+	gPad->SetLogz();
  	c6->cd(6);
  	hTDCBRvsXT->Draw("COLZ");
+	gPad->SetLogz();
   	c6->cd(7);
   	hTDCBLvsXB->Draw("COLZ");
+	gPad->SetLogz();
   	c6->cd(8);
   	hTDCBRvsXB->Draw("COLZ");
+	gPad->SetLogz();
 
 	c6->DrawClone();
 
@@ -412,12 +420,16 @@ TCanvas* plotADCvsXpos(){
 
 	c5->cd(1);
  	hADCvsXTL->Draw("COLZ");
+	gPad->SetLogz();
  	c5->cd(2);
  	hADCvsXTR->Draw("COLZ");
+	gPad->SetLogz();
   	c5->cd(3);
   	hADCvsXBL->Draw("COLZ");
+	gPad->SetLogz();
   	c5->cd(4);
   	hADCvsXBR->Draw("COLZ");
+	gPad->SetLogz();
 
 	c5->DrawClone();
 
@@ -485,14 +497,19 @@ TCanvas* plotAngles(){
   	//hTheta2->Draw("SAME");
 	c7->cd(7);
 	hXtopXbottom->Draw("COLZ");
+	gPad->SetLogz();
 	c7->cd(8);
 	hXMeantopXMeanbottom->Draw("COLZ");
+	gPad->SetLogz();
 	c7->cd(9);
 	hXMeanXtop->Draw("COLZ");
+	gPad->SetLogz();
 	c7->cd(10);
 	hXMeanXbottom->Draw("COLZ");
+	gPad->SetLogz();
 	c7->cd(11);
 	hXMeanAngle->Draw("COLZ");
+	gPad->SetLogz();
 
 
 	c7->DrawClone();
@@ -552,8 +569,10 @@ TCanvas* plotADCTheta(){
 
 	c10->cd(1);
  	hADCTopvsTheta->Draw("COLZ");
+	gPad->SetLogz();
  	c10->cd(2);
  	hADCBottomvsTheta->Draw("COLZ");
+	gPad->SetLogz();
 
   	c10->cd(3);
         TF1 *myLeBronFit = new TF1("myLeBronFit","[0]*(1.0+[1]*cos(x*3.14159/180.0))",-60.0,60.0);
