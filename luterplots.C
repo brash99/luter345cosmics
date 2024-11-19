@@ -310,20 +310,26 @@ void luterplots(Int_t nrun, Double_t nscint=1.50) {
 	adcpos->Divide(2,2);
 	adcpos->cd(1);
 	htopLeftvXpos->Draw("COLZ");
+	gPad->SetLogz();
 	adcpos->cd(2);
 	htopRightvXpos->Draw("COLZ");
+	gPad->SetLogz();
 	adcpos->cd(3);
 	hbotLeftvXpos->Draw("COLZ");
+	gPad->SetLogz();
 	adcpos->cd(4);
 	hbotRightvXpos->Draw("COLZ");
+	gPad->SetLogz();
  	
 	TCanvas *adctheta = new TCanvas("adctheta","ADC vs theta",175,175,600,600);
  
 	adctheta->Divide(2,2);
 	adctheta->cd(1);
 	htopadctheta->Draw("COLZ");
+	gPad->SetLogz();
 	adctheta->cd(2);
 	hbotadctheta->Draw("COLZ");
+	gPad->SetLogz();
 	adctheta->cd(3);
 		
  //use a TProfile to convert the 2-d to 1-d problem
@@ -402,14 +408,20 @@ void luterplots(Int_t nrun, Double_t nscint=1.50) {
 	tdcposcorr->Divide(2,3);
 	tdcposcorr->cd(1);
 	httlxtop->Draw("COLZ");
+	gPad->SetLogz();
 	tdcposcorr->cd(2);
 	httlxbot->Draw("COLZ");
+	gPad->SetLogz();
 	tdcposcorr->cd(3);
 	htblxtop->Draw("COLZ");
+	gPad->SetLogz();
 	tdcposcorr->cd(4);
 	htblxbot->Draw("COLZ");
+	gPad->SetLogz();
 	tdcposcorr->cd(5);
 	htbrxtop->Draw("COLZ");
+	gPad->SetLogz();
 	tdcposcorr->cd(6);
 	htbrxbot->Draw("COLZ");
+	gPad->SetLogz();
 }
