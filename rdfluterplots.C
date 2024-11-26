@@ -378,32 +378,74 @@ TCanvas* plotTDCvsXpos(){
 	auto hTDCBLvsXB = v[1].Histo2D({"h3","TDC Bottom Left vs XBottom",bin,-0.3,0.3,bin,1950,2050},"xbottom","tdcbl");
 	auto hTDCBRvsXB = v[1].Histo2D({"h4","TDC Bottom Right vs XBottom",bin,-0.3,0.3,bin,1950,2050},"xbottom","tdcbr");
 
+        TF1 *myLinearFit = new TF1("myLinearFit","[0]+[1]*x",-0.15,0.15);
+	
 	c6->cd(1);
- 	hTDCTLvsXT->Draw("COLZ");
+	hTDCTLvsXT->Fit("myLinearFit");
+	hTDCTLvsXT->Draw("COLZ");
+        double par10 = (hTDCTLvsXT->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par11 = (hTDCTLvsXT->GetFunction("myLinearFit")->GetParameter(1));
 	gPad->SetLogz();
- 	c6->cd(2);
+ 
+	c6->cd(2);
+        hTDCTRvsXT->Fit("myLinearFit");
  	hTDCTRvsXT->Draw("COLZ");
-	gPad->SetLogz();
-  	c6->cd(3);
-  	hTDCTLvsXB->Draw("COLZ");
-	gPad->SetLogz();
-  	c6->cd(4);
-  	hTDCTRvsXB->Draw("COLZ");
-	gPad->SetLogz();
-	c6->cd(5);
- 	hTDCBLvsXT->Draw("COLZ");
-	gPad->SetLogz();
- 	c6->cd(6);
- 	hTDCBRvsXT->Draw("COLZ");
-	gPad->SetLogz();
-  	c6->cd(7);
-  	hTDCBLvsXB->Draw("COLZ");
-	gPad->SetLogz();
-  	c6->cd(8);
-  	hTDCBRvsXB->Draw("COLZ");
+        double par20 = (hTDCTRvsXT->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par21 = (hTDCTRvsXT->GetFunction("myLinearFit")->GetParameter(1));
 	gPad->SetLogz();
 
+	c6->cd(3);
+        hTDCTLvsXB->Fit("myLinearFit");
+  	hTDCTLvsXB->Draw("COLZ");
+	gPad->SetLogz();
+        double par30 = (hTDCTLvsXB->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par31 = (hTDCTLvsXB->GetFunction("myLinearFit")->GetParameter(1));
+
+	c6->cd(4);
+        hTDCTRvsXB->Fit("myLinearFit");
+  	hTDCTRvsXB->Draw("COLZ");
+	gPad->SetLogz();
+        double par40 = (hTDCTRvsXB->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par41 = (hTDCTRvsXB->GetFunction("myLinearFit")->GetParameter(1));
+
+	c6->cd(5);
+        hTDCBLvsXT->Fit("myLinearFit");
+ 	hTDCBLvsXT->Draw("COLZ");
+	gPad->SetLogz();
+        double par50 = (hTDCBLvsXT->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par51 = (hTDCBLvsXT->GetFunction("myLinearFit")->GetParameter(1));
+
+	c6->cd(6);
+        hTDCBRvsXT->Fit("myLinearFit");
+ 	hTDCBRvsXT->Draw("COLZ");
+	gPad->SetLogz();
+        double par60 = (hTDCBRvsXT->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par61 = (hTDCBRvsXT->GetFunction("myLinearFit")->GetParameter(1));
+
+	c6->cd(7);
+        hTDCBLvsXB->Fit("myLinearFit");
+  	hTDCBLvsXB->Draw("COLZ");
+	gPad->SetLogz();
+        double par70 = (hTDCBLvsXB->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par71 = (hTDCBLvsXB->GetFunction("myLinearFit")->GetParameter(1));
+
+	c6->cd(8);
+        hTDCBRvsXB->Fit("myLinearFit");
+  	hTDCBRvsXB->Draw("COLZ");
+	gPad->SetLogz();
+        double par80 = (hTDCBRvsXB->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
+        double par81 = (hTDCBRvsXB->GetFunction("myLinearFit")->GetParameter(1));
+
 	c6->DrawClone();
+	
+	std::cout << "par10 = " << par10 << " ... 2/(par11*t_convert) = " << 2./(par11*t_convert) << std::endl;
+	std::cout << "par20 = " << par20 << " ... 2/(par21*t_convert) = " << 2./(par21*t_convert) << std::endl;
+	std::cout << "par30 = " << par30 << " ... 2/(par31*t_convert) = " << 2./(par31*t_convert) << std::endl;
+	std::cout << "par40 = " << par40 << " ... 2/(par41*t_convert) = " << 2./(par41*t_convert) << std::endl;
+	std::cout << "par50 = " << par50 << " ... 2/(par51*t_convert) = " << 2./(par51*t_convert) << std::endl;
+	std::cout << "par60 = " << par60 << " ... 2/(par61*t_convert) = " << 2./(par61*t_convert) << std::endl;
+	std::cout << "par70 = " << par70 << " ... 2/(par71*t_convert) = " << 2./(par71*t_convert) << std::endl;
+	std::cout << "par80 = " << par80 << " ... 2/(par81*t_convert) = " << 2./(par81*t_convert) << std::endl;
 
 	return c6;
 
