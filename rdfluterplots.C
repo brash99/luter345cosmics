@@ -89,7 +89,7 @@ bool getTrigger(int* tdc, int* adc) {
 }
 
 TCanvas* calculateADCFactors() {
-	
+
 	ROOT::RDF::RResultPtr<TH1D> hadcraw[Ntdc];
 	TCanvas *c3 = new TCanvas("c3", "c3", 100,100,600,600);
 	c3->Divide(2,2, 0.01, 0.01, 0);
@@ -104,7 +104,7 @@ TCanvas* calculateADCFactors() {
         for( int i = 0; i < Nadc ; i++) {//Start ADC filling loop
                   fscanf(adcpeds,"%lf\n",&ped[i]);
 	}
-	
+
 	for (int i = bl; i <= tr ; i++) {
 		auto varname = "adc[" + std::to_string(i) + "]";
 		hadcraw[i] = v[0].Define(Form("hadc%02d",i),varname).Histo1D({Form("hadc%02d",i), adcnames[i], bin, 0, 3000.0},Form("hadc%02d",i));
@@ -113,7 +113,7 @@ TCanvas* calculateADCFactors() {
 		c3->cd(i+1);
 		hadcraw[i]->DrawClone();
 	}
-	
+
 	return c3;
 
 }
@@ -179,7 +179,7 @@ float getTheta2(bool trigger, float xtop, float xbottom) {
         }
 
         Double_t rndrb = sqrt(rndxb*rndxb+rndyb*rndyb)+rnd_bottom_pos;
-	Double_t theta2 = 0.8281-rtod*atan((rndrt-rndrb)/dscint);	
+	Double_t theta2 = 0.8281-rtod*atan((rndrt-rndrb)/dscint);
 
 	if (trigger) {
 		return theta2;
@@ -379,14 +379,14 @@ TCanvas* plotTDCvsXpos(){
 	auto hTDCBRvsXB = v[1].Histo2D({"h4","TDC Bottom Right vs XBottom",bin,-0.3,0.3,bin,1950,2050},"xbottom","tdcbr");
 
         TF1 *myLinearFit = new TF1("myLinearFit","[0]+[1]*x",-0.15,0.15);
-	
+
 	c6->cd(1);
 	hTDCTLvsXT->Fit("myLinearFit");
 	hTDCTLvsXT->Draw("COLZ");
         double par10 = (hTDCTLvsXT->GetFunction("myLinearFit")->GetParameter(0))-2000.0;
         double par11 = (hTDCTLvsXT->GetFunction("myLinearFit")->GetParameter(1));
 	gPad->SetLogz();
- 
+
 	c6->cd(2);
         hTDCTRvsXT->Fit("myLinearFit");
  	hTDCTRvsXT->Draw("COLZ");
@@ -437,7 +437,7 @@ TCanvas* plotTDCvsXpos(){
         double par81 = (hTDCBRvsXB->GetFunction("myLinearFit")->GetParameter(1));
 
 	c6->DrawClone();
-	
+
 	std::cout << "par10 = " << par10 << " ... 2/(par11*t_convert) = " << 2./(par11*t_convert) << std::endl;
 	std::cout << "par20 = " << par20 << " ... 2/(par21*t_convert) = " << 2./(par21*t_convert) << std::endl;
 	std::cout << "par30 = " << par30 << " ... 2/(par31*t_convert) = " << 2./(par31*t_convert) << std::endl;
@@ -679,13 +679,13 @@ void rdfluterplots(int run_number = 42) {
 
 	auto entries = d.Count();
 	cout << *entries << " entries in Tree with no filter" << endl;
-	
+
 	auto triggers = fdf.Filter("trigger==true").Count();
 	cout << *triggers << " entries passed Main trigger" << endl;
 
 	auto fdft = fdf.Filter("trigger==true");
-	v.push_back(fdft); 
-	
+	v.push_back(fdft);
+
 	calculateTOffsets();
 	calculateADCFactors();
 
